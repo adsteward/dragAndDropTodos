@@ -8,7 +8,8 @@ export default class DragDrop extends React.Component {
     todos: [
       {task: "math homework", category:"backburn"},
       {task: "practice", category:"todo"},
-      {task: "shopping", category:"todo"}
+      {task: "shopping", category:"todo"},
+      {task: "astral project", category:"completed"}
     ]
   }
 
@@ -39,7 +40,8 @@ export default class DragDrop extends React.Component {
       var todos = {
         backburn: [],
         todo: [],
-        ip: []
+        ip: [],
+        completed: []
       }
 
       this.state.todos.forEach ((task) => {
@@ -48,7 +50,7 @@ export default class DragDrop extends React.Component {
               onDragStart = {(e) => this.onDragStart(e, task.task)}
               draggable
               className = "draggable"
-              style = {{backgroundColor: "blue"}}
+
               >
               {task.task}
               </div>
@@ -74,6 +76,12 @@ export default class DragDrop extends React.Component {
           onDrop = {(e) => this.onDrop(e, "ip")}>
           <span className="category-header">In Progress</span>
           {todos.ip}
+        </div>
+
+        <div className='completed droppable' onDragOver={(e)=>this.onDragOver(e)}
+          onDrop = {(e) => this.onDrop(e, "completed")}>
+          <span className="category-header">Completed</span>
+          {todos.completed}
         </div>
         </div>
       </div>

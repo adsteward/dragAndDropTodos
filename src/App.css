@@ -1,35 +1,57 @@
 .App {
   text-align: center;
+  height: 100%;
 }
 
 .header {
   text-align: center;
   font-family: "Arial";
+  font-size: 26px;
+  text-decoration: underline;
 }
 
-.droppable {
-  background-color: "yellow";
-}
 
-/* .categories {
+
+.categories {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  border: 2px solid;
-  grid-column-gap: 20px;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 10px;
 
-} */
+  padding: 15px;
+  justify-content: space-between;
+  align-items: start;
+  height: 100vh;
+  width: 100vw;
 
+}
 
  .category-header {
-   font-size: 18px;
+   font-size: 24px;
    font-family: "Arial";
+   color: black;
    text-align: center;
+   text-decoration: underline;
+   padding: 10px;
+ }
+
+ .droppable {
+   display: block;
+   justify-content: center;
+   background-color: #ece6ff;
+   padding: 30px;
+   height: 100vh;
+   border: 5px solid black;
+   border-radius: 5px;
  }
 
  .draggable {
+   grid-column: auto;
+   grid-row: auto;
    width: 100px;
-   height: 100px;
    text-align: center;
-
-
+   display: block;
+   border-radius: 5px;
+   margin: 15px;
+   padding: 20px;
+   background-color: #d1ffdc;
  }

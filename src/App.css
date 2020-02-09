@@ -35,8 +35,6 @@
  }
 
  .droppable {
-   display: block;
-   justify-content: center;
    background-color: #ece6ff;
    padding: 30px;
    height: 100vh;

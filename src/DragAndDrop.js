@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';
+import makeTaskCard from './taskCard';
+import Editable from "./Editable";
 
 export default class DragDrop extends React.Component {
+
   state = {
     todos: [
-      {task: "math homework", category:"backburn"},
-      {task: "practice", category:"todo"},
-      {task: "shopping", category:"todo"},
-      {task: "astral project", category:"completed"}
+      {taskName: "math homework", category:"backburn"},
+      {taskName: "practice", category:"todo"},
+      {taskName: "shopping", category:"todo"},
+      {taskName: "astral project", category:"completed"}
     ]
   }
+
 
   onDragOver = (e) => {
     e.preventDefault();
@@ -24,7 +28,7 @@ export default class DragDrop extends React.Component {
   onDrop = (e, cat) => {
     let id = e.dataTransfer.getData("id");
     let todos = this.state.todos.filter((todo) => {
-      if (todo.task == id){
+      if (todo.taskName == id){
         todo.category = cat;
       }
       return todo;
@@ -36,6 +40,24 @@ export default class DragDrop extends React.Component {
     })
 
   }
+
+  handleInputChange = (input, taskName) => {
+
+    this.setState(state => {
+      const todos = state.todos.map((task, j) => {
+        if (state.todos[j].taskName === taskName) {
+          return {taskName: input, category: state.todos[j].category};
+        } else {
+          return {taskName: state.todos[j].taskName, category: state.todos[j].category};
+        }
+      });
+      return {
+        todos,
+      };
+    });
+  }
+
+
     render(){
       var todos = {
         backburn: [],
@@ -44,16 +66,31 @@ export default class DragDrop extends React.Component {
         completed: []
       }
 
+
       this.state.todos.forEach ((task) => {
+
         todos[task.category].push(
-          <div key={task.task}
-              onDragStart = {(e) => this.onDragStart(e, task.task)}
+          <Editable text={task.taskName}
+          placeholder="Write a task name"
+          type="input"
+          //childRef={this.inputRef}
+           key={task.taskName}
+              onDragStart = {(e) => this.onDragStart(e, task.taskName)}
               draggable
               className = "draggable"
-
               >
-              {task.task}
-              </div>
+              <input
+                //ref={this.inputRef}
+                type="text"
+                name="task"
+                placeholder="Write a task name"
+                value={task.taskName}
+                onChange={e => this.handleInputChange(e.target.value, task.taskName)}
+                />
+          </Editable>
+          // <div>
+          // <makeTaskCard task={this.task} onDragStart={this.onDragStart}/>
+          // </div>
         )
       })
       return(

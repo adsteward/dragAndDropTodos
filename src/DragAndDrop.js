@@ -2,8 +2,10 @@ import React, { useState, useRef} from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import './App.css';
-import makeTaskCard from './taskCard';
+import TaskCard from './taskCard';
 import Editable from "./Editable";
+import makeTaskCard from "./makeTaskCard";
+
 
 export default class DragDrop extends React.Component {
 
@@ -28,7 +30,7 @@ export default class DragDrop extends React.Component {
   onDrop = (e, cat) => {
     let id = e.dataTransfer.getData("id");
     let todos = this.state.todos.filter((todo) => {
-      if (todo.taskName == id){
+      if (todo.taskName === id){
         todo.category = cat;
       }
       return todo;
@@ -57,6 +59,10 @@ export default class DragDrop extends React.Component {
     });
   }
 
+  // componentDidMount(){
+  //   this.nameInput.focus();
+  // }
+
 
     render(){
       var todos = {
@@ -73,14 +79,14 @@ export default class DragDrop extends React.Component {
           <Editable text={task.taskName}
           placeholder="Write a task name"
           type="input"
-          //childRef={this.inputRef}
-           key={task.taskName}
+          childRef={this.inputRef}
+           key={task}
               onDragStart = {(e) => this.onDragStart(e, task.taskName)}
               draggable
               className = "draggable"
               >
               <input
-                //ref={this.inputRef}
+                ref={input => input && input.focus()}
                 type="text"
                 name="task"
                 placeholder="Write a task name"

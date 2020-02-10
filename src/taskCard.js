@@ -1,28 +1,27 @@
-import React from 'react';
-import Editable from "./Editable";
-import DragAndDrop from "./DragAndDrop";
+import React from "react";
+import Editable from './Editable';
 
 
+export default class TaskCard extends React.Component{
 
-export default function makeTaskCard(props){
-  return (
-    <Editable text={props.task.taskName}
-    placeholder="Write a task name"
-    type="input"
-     key={props.task.taskName}
-        onDragStart = {(e) => props.this.onDragStart(e, props.task.taskName)}
-        draggable
-        className = "draggable"
-        >
-        <input
-          type="text"
-          name="task"
-          placeholder="Write a task name"
-          value={props.task.taskName}
-          //onChange={e => props.this.handleInputChange(e, props.task.taskName)}
-          />
-    </Editable>
-  )
-
-
+  render(){
+    return(
+      <Editable text={this.props.taskName}
+      placeholder="Write a task name"
+      type="input"
+       key={this.props.taskName}
+          onDragStart = {(e) => this.props.onDragStart(e, this.props.taskName)}
+          draggable
+          className = "draggable"
+          >
+          <input
+            type="text"
+            name="task"
+            placeholder="Write a task name"
+            value={this.props.taskName}
+            onChange={e => this.props.handleInputChange(e, this.props.taskName)}
+            />
+      </Editable>
+    )
+  }
 }

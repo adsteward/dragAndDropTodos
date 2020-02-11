@@ -59,9 +59,15 @@ export default class DragDrop extends React.Component {
     });
   }
 
-  // componentDidMount(){
-  //   this.nameInput.focus();
-  // }
+  newTask = () => {
+      this.setState(state => {
+
+        const todos = state.todos.concat({taskName: "Enter a task Name", category: "backburn"});
+        return {
+          todos,
+        };
+      });
+    }
 
 
     render(){
@@ -72,7 +78,7 @@ export default class DragDrop extends React.Component {
         completed: []
       }
 
-
+    
       this.state.todos.forEach ((task) => {
 
         todos[task.category].push(
@@ -94,6 +100,7 @@ export default class DragDrop extends React.Component {
                 onChange={e => this.handleInputChange(e.target.value, task.taskName)}
                 />
           </Editable>
+
           // <div>
           // <makeTaskCard task={this.task} onDragStart={this.onDragStart}/>
           // </div>
@@ -102,30 +109,34 @@ export default class DragDrop extends React.Component {
       return(
         <div className= "container-drag">
         <h2 className="header">DRAG & DROP</h2>
+        <button className="newtask" onClick={this.newTask} >
+          New Task
+        </button>
           <div className= "categories">
-        <div className="backburn droppable" onDragOver={(e)=>this.onDragOver(e)}
-          onDrop = {(e) => this.onDrop(e, "backburn")}>
-          <span className="category-header">Back Burner</span>
-          {todos.backburn}
-        </div>
+            <div className="backburn droppable" onDragOver={(e)=>this.onDragOver(e)}
+            onDrop = {(e) => this.onDrop(e, "backburn")}>
+              <span className="category-header">Back Burner</span>
 
-        <div className='todo droppable' onDragOver={(e)=>this.onDragOver(e)}
-          onDrop = {(e) => this.onDrop(e, "todo")}>
-          <span className="category-header">To Do</span>
-          {todos.todo}
-        </div>
+              {todos.backburn}
+            </div>
 
-        <div className='ip droppable' onDragOver={(e)=>this.onDragOver(e)}
-          onDrop = {(e) => this.onDrop(e, "ip")}>
-          <span className="category-header">In Progress</span>
-          {todos.ip}
-        </div>
+            <div className='todo droppable' onDragOver={(e)=>this.onDragOver(e)}
+            onDrop = {(e) => this.onDrop(e, "todo")}>
+              <span className="category-header">To Do</span>
+              {todos.todo}
+            </div>
 
-        <div className='completed droppable' onDragOver={(e)=>this.onDragOver(e)}
-          onDrop = {(e) => this.onDrop(e, "completed")}>
-          <span className="category-header">Completed</span>
-          {todos.completed}
-        </div>
+            <div className='ip droppable' onDragOver={(e)=>this.onDragOver(e)}
+            onDrop = {(e) => this.onDrop(e, "ip")}>
+              <span className="category-header">In Progress</span>
+              {todos.ip}
+            </div>
+
+            <div className='completed droppable' onDragOver={(e)=>this.onDragOver(e)}
+            onDrop = {(e) => this.onDrop(e, "completed")}>
+              <span className="category-header">Completed</span>
+              {todos.completed}
+            </div>
         </div>
       </div>
       );

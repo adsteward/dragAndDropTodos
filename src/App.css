@@ -10,7 +10,17 @@
   text-decoration: underline;
 }
 
-
+.newtask {
+  background-color: #ece6ff;
+  border-color: black;
+  border-width: medium;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 18px;
+  font-family: "Arial";
+  padding: 10px 10px;
+  margin-left: 18px;
+}
 
 .categories {
   display: grid;
